@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="warn">
+	<Properties>
+		<Property name="logDir">/Users/jiang/Documents/learn/logs/log4j2/FInanceProject/$${date:yyyyMMdd}/</Property>
+		<Property name="rollLogDir">/Users/jiang/Documents/learn/logs/log4j2/FInanceProject/gz/</Property>
+		<Property name="boFile">bo.trc</Property>
+		<Property name="dbFile">database.trc</Property>
+		<Property name="reqFile">req.trc</Property>
+		<Property name="debugFile">debug.trc</Property>
+	</Properties>
+
+	<appenders>
+		<!--fileName中如果使用相对路径，则是相对于工程路径。这里是 工程路径/log/test1/test1.log-->
+		<File name="boConfig" fileName="${logDir}/${boFile}" append="false">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+		</File>
+		<RollingFile name="boRollingFile" fileName="${rollLogDir}/${boFile}" append="true"
+					 filePattern="${test1logDir}/$${date:yyyy-MM}/${boFile}_%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+			<SizeBasedTriggeringPolicy size="4 MB"/>
+		</RollingFile>
+
+		<File name="dbConfig" fileName="${logDir}/${dbFile}" append="false">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+		</File>
+		<RollingFile name="dbRollingFile" fileName="${rollLogDir}/${dbFile}" append="true"
+					 filePattern="${test1logDir}/$${date:yyyy-MM}/${dbFile}_%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+			<SizeBasedTriggeringPolicy size="4 MB"/>
+		</RollingFile>
+
+		<File name="reqConfig" fileName="${logDir}/${reqFile}" append="false">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+		</File>
+		<RollingFile name="reqRollingFile" fileName="${rollLogDir}/${reqFile}" append="true"
+					 filePattern="${test1logDir}/$${date:yyyy-MM}/${reqFile}_%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+			<SizeBasedTriggeringPolicy size="4 MB"/>
+		</RollingFile>
+
+		<File name="debugConfig" fileName="${logDir}/${debugFile}" append="false">
+			<PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+		</File>
+		<RollingFile name="debugRollingFile" fileName="${rollLogDir}/${debugFile}" append="true"
+					 filePattern="${test1logDir}/$${date:yyyy-MM}/${debugFile}_%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+			<SizeBasedTriggeringPolicy size="4 MB"/>
+		</RollingFile>
+	</appenders>
+
+	<loggers>
+		<Logger name="boLogger" additivity="TRUE" level="ALL">
+			<AppenderRef ref="boConfig" level="ALL"/>
+			<AppenderRef ref="boRollingFile" level="ALL"/>
+		</Logger>
+
+		<Logger name="dbLogger" additivity="TRUE" level="ALL">
+			<AppenderRef ref="dbConfig" level="ALL"/>
+			<AppenderRef ref="dbRollingFile" level="ALL"/>
+		</Logger>
+
+		<Logger name="reqLogger" additivity="TRUE" level="ALL">
+			<AppenderRef ref="reqConfig" level="ALL"/>
+			<AppenderRef ref="reqRollingFile" level="ALL"/>
+		</Logger>
+
+		<Logger name="debugLogger" additivity="TRUE" level="ALL">
+			<AppenderRef ref="debugConfig" level="ALL"/>
+			<AppenderRef ref="debugRollingFile" level="ALL"/>
+		</Logger>
+	</loggers>
+</configuration>

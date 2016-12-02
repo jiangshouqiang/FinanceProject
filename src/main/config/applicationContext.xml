@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:annotation-driven />
+    <!--<import resource="./xmlConfig/aopConfig.xml"/>-->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name="maxInMemorySize" value="10000"/>-->
+    <!--</bean>-->
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
+        <!--<property name=""-->
+    <!--</bean>-->
+    <!--<bean id="logAspect" class="com.gr.jiang.common.spring.aspect.LogAspect"/>-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:config proxy-target-class="true">-->
+        <!--<aop:aspect id="dbLogAspect" ref="logAspect">-->
+            <!--<aop:pointcut id="dbLog" expression="execution(* com.gr.jiang.dao.impl.*.*(..))"/>-->
+            <!--<aop:after method="afterHandler" pointcut-ref="dbLog"/>-->
+            <!--<aop:before method="beforeHandler" pointcut-ref="dbLog"/>-->
+            <!--<aop:around method="doAround" pointcut-ref="dbLog"/>-->
+        <!--</aop:aspect>-->
+        <!--<aop:aspect id="jdbcTempleAspect" ref="logAspect">-->
+            <!--<aop:pointcut id="jdbcLog" expression="execution(* org.springframework.jdbc.core.JdbcTemplate.*(..))"/>-->
+            <!--<aop:around method="doAround" pointcut-ref="jdbcLog"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <!--<context:property-placeholder location="classpath*:jdbc.properties"/>-->
+    <context:property-placeholder location="classpath*:log4j.properties" />
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <bean id="dataSourceLocal" name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/heritrex"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="jiangshouqiang"/>-->
+        <!--<property name="driverClass"  value="${jdbc.driverClassName}"/>-->
+        <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
+        <!--<property name="user" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.passwd}" />-->
+        <!--<property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>-->
+        <!--<property name="minPoolSize" value="${jdbc.minPoolSize}" />-->
+        <!--<property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>-->
+        <!--<property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>-->
+        <!--<property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>-->
+        <!--<property name="maxStatements" value="${jdbc.maxStatements}"/>-->
+        <!--<property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"/>-->
+        <property name="driverClass"  value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/heritrex"/>
+        <property name="user" value="root"/>
+        <property name="password" value="jiangshouqiang" />
+        <property name="maxPoolSize" value="100"/>
+        <property name="minPoolSize" value="10" />
+        <property name="initialPoolSize" value="20"/>
+        <property name="maxIdleTime" value="600"/>
+        <property name="acquireIncrement" value="5"/>
+        <property name="maxStatements" value="5"/>
+        <property name="idleConnectionTestPeriod" value="60"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true" name="XMLConfigTest"
+			   packages="org.apache.logging.log4j.test">
+	<appenders>
+		<!--输出控制台 -->
+		<!--<Console name="Console" target="SYSTEM_OUT">-->
+		<!--<ThresholdFilter level="debug" />-->
+		<!--<PatternLayout charset="GBK"-->
+		<!--pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n" />-->
+		<!--</Console>-->
+		<!--输出到文件-->
+		<File name="LogFile" fileName="${web:rootDir}/logs/app.log" advertise="true">
+			<PatternLayout pattern="%d %p %C{1.} [%t] %m%n" />
+		</File>
+	</appenders>
+
+	<loggers>
+		<!--建立一个默认的root的logger -->
+		<root level="info">
+		</root>
+	</loggers>
+	<OutFileConfig>
+		<RollingFileAppender>
+			<pattern value="%d %p %c{1.} [%t] %m%n"/>
+			<level value="info"/>
+			<triggeringPolicySize value="2 MB"/>
+			<dir value="/Users/jiang/Documents/learn/logs/log4j2/FInanceProject/%d/"/>
+			<filePattern value="target/" />
+			<bufferedIO value="true" />
+			<bufferSize value="8192" />
+			<immediateFlush value="true"/>
+			<ignoreExceptions value="true" />
+			<advertise value="true" />
+		</RollingFileAppender>
+	</OutFileConfig>
+</Configuration>

@@ -1,0 +1,79 @@
+group 'FinanceProject'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'maven'
+sourceSets {
+    main {
+        resources {
+            srcDir('src/main/config')
+        }
+    }
+}
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.4'
+//        classpath 'com.bmuschko:gradle-cargo-plugin:2.0.1'
+    }
+}
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+//    }
+//}
+
+sourceCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+//    compile("org.springframework.boot:spring-boot-devtools")
+    compile(
+            "org.springframework:spring-context:4.0.5.RELEASE",
+            "org.springframework:spring-web:4.0.5.RELEASE",
+            "org.springframework:spring-webmvc:4.0.5.RELEASE",
+            "org.springframework:spring-aspects:4.0.5.RELEASE",
+            "com.fasterxml.jackson.core:jackson-annotations:2.6.3",
+            "com.fasterxml.jackson.core:jackson-core:2.6.3",
+            "com.fasterxml.jackson.core:jackson-databind:2.6.3",
+            "org.apache.logging.log4j:log4j-core:2.6.2",
+            "org.slf4j:slf4j-api:1.7.13",
+            "org.apache.logging.log4j:log4j-slf4j-impl:2.6.2",
+            "javax.servlet:jstl:1.2"
+    )
+    testCompile("org.springframework:spring-test:4.0.5.RELEASE")
+    compile("mysql:mysql-connector-java:5.1.37")
+    compile("org.springframework:spring-jdbc:4.0.5.RELEASE")
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'c3p0:c3p0:0.9.0.2'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    def tomcatVersion = '6.0.29'
+    tomcat "org.apache.tomcat:catalina:${tomcatVersion}",
+            "org.apache.tomcat:coyote:${tomcatVersion}",
+            "org.apache.tomcat:jasper:${tomcatVersion}"
+    buildDir = 'out'
+}
+
+uploadArchives {
+    repositories {
+        ivy {
+            credentials {
+                username "admin"
+                password "pasword"
+            }
+            url "http://localhost:8080/jfrog/yangai"
+        }
+    }
+}

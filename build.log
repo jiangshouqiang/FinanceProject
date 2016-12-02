@@ -1,0 +1,18 @@
+:compileJava UP-TO-DATE
+:processResources UP-TO-DATE
+:classes UP-TO-DATE
+:war UP-TO-DATE
+:assemble UP-TO-DATE
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses UP-TO-DATE
+:test
+
+dao.TxIfDaoTest > testquery FAILED
+    java.lang.NoClassDefFoundError
+        Caused by: java.lang.ClassNotFoundException
+:test FAILED
+
+BUILD FAILED
+
+Total time: 17.916 secs
